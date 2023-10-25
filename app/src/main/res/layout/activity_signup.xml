@@ -22,17 +22,18 @@
                 android:textColor="@color/HardBlue"
                 android:textSize="@dimen/_30ssp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/shapeableImageView"
+                app:layout_constraintBottom_toTopOf="@+id/ivUserImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.057"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shapeableImageView"
+        android:id="@+id/ivUserImage"
         android:layout_width="156.00dp"
         android:layout_height="156.00dp"
         android:layout_marginTop="48dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         android:src="@drawable/cirleshape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
@@ -40,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvSignup" />
 
     <TextView
-                android:id="@+id/ivUserImage"
+                android:id="@+id/tvWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -50,7 +51,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/shapeableImageView" />
+                app:layout_constraintTop_toBottomOf="@id/ivUserImage" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/llUserSelection"
@@ -60,7 +61,7 @@
                 android:layout_marginTop="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivUserImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
                 android:padding="20dp"
 
                 >
@@ -249,18 +250,6 @@
 
 
             </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
