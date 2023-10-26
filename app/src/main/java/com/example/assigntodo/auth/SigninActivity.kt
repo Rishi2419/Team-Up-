@@ -3,21 +3,17 @@ package com.example.assigntodo.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.assigntodo.BossMainActivity
-import com.example.assigntodo.EmployeeMainActivity
-import com.example.assigntodo.R
+import com.example.assigntodo.Employeemainactivity
 import com.example.assigntodo.Users
 import com.example.assigntodo.databinding.ActivitySigninBinding
-import com.example.assigntodo.databinding.ActivitySignupBinding
 import com.example.assigntodo.utils.utils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.installations.Utils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -56,14 +52,19 @@ class SigninActivity : AppCompatActivity() {
                     FirebaseDatabase.getInstance().getReference("Users").child(currentUser).addListenerForSingleValueEvent(object   : ValueEventListener{
                         override fun onDataChange(snapshot: DataSnapshot) {
                             val currentUserData = snapshot.getValue(Users::class.java)
+                            if(currentUserData?.usertype=="Employee"){
+                                startActivity(Intent(this@SigninActivity,Employeemainactivity::class.java))
+                                finish()
+                            }
                             if(currentUserData?.usertype=="Boss"){
                                 startActivity(Intent(this@SigninActivity,BossMainActivity::class.java))
                                 finish()
                             }
-                            else{
-                                startActivity(Intent(this@SigninActivity,EmployeeMainActivity::class.java))
-                                finish()
-                            }
+//                            if(currentUserData?.usertype=="Employee"){
+//                                startActivity(Intent(this@SigninActivity,EmployeeMainActivity::class.java))
+//                                finish()
+//                            }
+
 //                            while (currentUserData?.usertype=="Boss"){
 //                               startActivity(Intent(this@SigninActivity,BossMainActivity::class.java))
 //                                finish()

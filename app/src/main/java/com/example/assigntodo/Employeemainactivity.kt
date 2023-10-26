@@ -3,9 +3,9 @@ package com.example.assigntodo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class EmployeeMainActivity : AppCompatActivity() {
+class Employeemainactivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_employee_main)
+        setContentView(R.layout.activity_employeemainactivity)
     }
 }
