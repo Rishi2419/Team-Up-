@@ -5,19 +5,15 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
-import com.example.assigntodo.Boss
-import com.example.assigntodo.Employee
-import com.example.assigntodo.R
+import com.example.assigntodo.Users
 import com.example.assigntodo.databinding.ActivitySignupBinding
 import com.example.assigntodo.utils.utils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -52,6 +48,12 @@ class SignupActivity : AppCompatActivity() {
         }
 
             binding.btnregistor.setOnClickListener{createuser()}
+
+            tvSignin.setOnClickListener{
+                startActivity(Intent(this@SignupActivity,SigninActivity::class.java))
+                finish()
+
+            }
         }
     }
 
@@ -71,6 +73,7 @@ class SignupActivity : AppCompatActivity() {
              else if (password == confirmPassword){
                  uploadImageUri(name,email,password)
              }
+
             else{
                  utils.hideDialog()
                 utils.showtoast(this,"Password are not matching")
@@ -114,15 +117,15 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun saveUserData(name: String, email: String, password: String, downloadURL: Uri?) {
-        if (userType=="Boss"){
             lifecycleScope.launch {
-                val db = FirebaseDatabase.getInstance().getReference("Boss")
+                val db = FirebaseDatabase.getInstance().getReference("Users")
                 try {
                     val firebaseAuth = FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).await()
 
                     if (firebaseAuth.user != null){
                         val uId = firebaseAuth.user?.uid.toString()
-                        val boss = Boss(uId,name,email,password,downloadURL.toString())
+                        val saveusertype = if(userType == "Boss")"Boss" else "Employee"
+                        val boss = Users(saveusertype,uId,name,email,password,downloadURL.toString())
                         db.child(uId).setValue(boss).await()
                         utils.hideDialog()
                         utils.showtoast(this@SignupActivity,"Signed Up Successfully!")
@@ -140,33 +143,6 @@ class SignupActivity : AppCompatActivity() {
                     utils.showtoast(this@SignupActivity,e.message.toString())
                 }
             }
-        }
-        if (userType=="Employee"){
-            lifecycleScope.launch {
-                val db = FirebaseDatabase.getInstance().getReference("Employee")
-                try {
-                    val firebaseAuth = FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).await()
 
-                    if (firebaseAuth.user != null){
-                        val uId = firebaseAuth.user?.uid.toString()
-                        val emp = Employee(uId,name,email,password,downloadURL.toString())
-                        db.child(uId).setValue(emp).await()
-                        utils.hideDialog()
-                        utils.showtoast(this@SignupActivity,"Signed Up Successfully!")
-                        val intent = Intent(this@SignupActivity,SigninActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                    else{
-                        utils.hideDialog()
-                        utils.showtoast(this@SignupActivity,"Signed Up Failed")
-                    }
-                }
-                catch (e:Exception){
-                        utils.hideDialog()
-                    utils.showtoast(this@SignupActivity,e.message.toString())
-                }
-            }
-        }
     }
 }

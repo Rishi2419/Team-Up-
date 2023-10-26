@@ -19,7 +19,7 @@
             android:name=".auth.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".BossMainActivity"
             android:exported="false" />
         <activity
             android:name=".auth.SplashActivity"

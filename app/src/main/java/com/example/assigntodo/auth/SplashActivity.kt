@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.core.os.postDelayed
-import com.example.assigntodo.MainActivity
 import com.example.assigntodo.R
 
 @SuppressLint("CustomSplashScreen")

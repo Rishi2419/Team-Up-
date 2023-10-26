@@ -116,6 +116,9 @@
                 android:id="@+id/tvNameLL"
                 style="@style/LoginTextInputOuterFieldStyle"
                 android:layout_width="match_parent"
+                app:boxStrokeColor="@color/HardBlue"
+                android:textColorHint="@color/black"
+                app:endIconTint="@color/HardBlue"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +146,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNameLL">
+                app:layout_constraintTop_toBottomOf="@+id/tvNameLL"
+                app:boxStrokeColor="@color/HardBlue"
+                android:textColorHint="@color/black"
+                app:endIconTint="@color/HardBlue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
@@ -167,6 +173,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvEmailLLL"
                 app:endIconMode="password_toggle"
+                app:boxStrokeColor="@color/HardBlue"
+                android:textColorHint="@color/black"
                 app:endIconTint="@color/HardBlue">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -191,6 +199,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etPasswordL"
                 app:endIconMode="password_toggle"
+                app:boxStrokeColor="@color/HardBlue"
+                android:textColorHint="@color/black"
                 app:endIconTint="@color/HardBlue"
                 >
 
@@ -239,6 +249,7 @@
                     android:textColor="@color/Light1" />
 
                 <TextView
+                    android:id="@+id/tvSignin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sign in"

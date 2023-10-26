@@ -1,6 +1,7 @@
 package com.example.assigntodo
 
-data class Boss(
+data class Users(
+    val usertype : String? = null,
     val bossId : String? = null,
     val bossName : String? = null,
     val bossEmail : String? = null,
