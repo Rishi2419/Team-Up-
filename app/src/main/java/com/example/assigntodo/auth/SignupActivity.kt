@@ -5,11 +5,14 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.example.assigntodo.Users
+import com.example.assigntodo.databinding.AccountDialogBinding
 import com.example.assigntodo.databinding.ActivitySignupBinding
 import com.example.assigntodo.utils.utils
 import com.google.firebase.auth.FirebaseAuth
@@ -71,7 +74,14 @@ class SignupActivity : AppCompatActivity() {
                  utils.showtoast(this,"Please select a profile photo")
              }
              else if (password == confirmPassword){
-                 uploadImageUri(name,email,password)
+                 if(userType != ""){
+                     uploadImageUri(name,email,password)
+                 }
+                 else{
+                     utils.hideDialog()
+                     utils.showtoast(this,"Select user type")
+                 }
+
              }
 
             else{
@@ -123,15 +133,24 @@ class SignupActivity : AppCompatActivity() {
                     val firebaseAuth = FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).await()
 
                     if (firebaseAuth.user != null){
+                        FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                            val dialog = AccountDialogBinding.inflate(LayoutInflater.from(this@SignupActivity))
+                            val alertDialog = AlertDialog.Builder(this@SignupActivity)
+                                .setView(dialog.root)
+                                .create()
+                            utils.hideDialog()
+                            alertDialog.show()
+                            dialog.btnok.setOnClickListener{
+                                alertDialog.dismiss()
+                                startActivity(Intent(this@SignupActivity,SigninActivity::class.java))
+                                finish()
+                            }
+                        }
                         val uId = firebaseAuth.user?.uid.toString()
                         val saveusertype = if(userType == "Boss")"Boss" else "Employee"
                         val boss = Users(saveusertype,uId,name,email,password,downloadURL.toString())
                         db.child(uId).setValue(boss).await()
-                        utils.hideDialog()
-                        utils.showtoast(this@SignupActivity,"Signed Up Successfully!")
-                        val intent = Intent(this@SignupActivity,SigninActivity::class.java)
-                        startActivity(intent)
-                        finish()
+
                     }
                     else{
                         utils.hideDialog()
