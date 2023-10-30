@@ -4,6 +4,7 @@
     android:layout_height="270dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/Light5"
+
     >
 
     <ImageView

@@ -148,8 +148,10 @@ class SignupActivity : AppCompatActivity() {
                         }
                         val uId = firebaseAuth.user?.uid.toString()
                         val saveusertype = if(userType == "Boss")"Boss" else "Employee"
-                        val boss = Users(saveusertype,uId,name,email,password,downloadURL.toString())
+                        val boss = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString())
                         db.child(uId).setValue(boss).await()
+                        val employee = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString())
+                        db.child(uId).setValue(employee).await()
 
                     }
                     else{

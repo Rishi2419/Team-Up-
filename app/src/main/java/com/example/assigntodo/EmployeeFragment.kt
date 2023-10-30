@@ -8,16 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.assigntodo.auth.SigninActivity
 import com.example.assigntodo.databinding.ForgotPasswordBinding
 import com.example.assigntodo.databinding.FragmentEmployeeBinding
 import com.example.assigntodo.databinding.FragmentWorkBinding
 import com.example.assigntodo.databinding.ShowLogoutBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class EmployeeFragment : Fragment() {
 
     private lateinit var binding: FragmentEmployeeBinding
+    private lateinit var employeesAdaptor: EmployeesAdaptor
 
 
 
@@ -27,16 +33,53 @@ class EmployeeFragment : Fragment() {
     ): View? {
         binding = FragmentEmployeeBinding.inflate(layoutInflater)
 
-        binding.tbemployees.setOnMenuItemClickListener{
-            when(it.itemId){
-                R.id.Logout->{
-                    showlogout()
-                    true
+        binding.apply  {
+            tbemployees.setOnMenuItemClickListener{
+                when(it.itemId){
+                    R.id.Logout->{
+                        showlogout()
+                        true
+                    }
+                    else-> false
                 }
-                else-> false
             }
         }
+
+
+        prepareRvForEmployeeAdapter()
+        showAllEmployess()
         return binding.root
+    }
+
+    private fun showAllEmployess() {
+        FirebaseDatabase.getInstance().getReference("Users").addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val empList = arrayListOf<Users>()
+                for (employees in snapshot.children){
+                    val currentUser = employees.getValue(Users::class.java)
+                    if (currentUser?.usertype == "Employee"){
+                        empList.add(currentUser)
+                    }
+                }
+                employeesAdaptor.differ.submitList(empList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
+
+    }
+
+    private fun prepareRvForEmployeeAdapter() {
+        employeesAdaptor= EmployeesAdaptor()
+        binding.rvEmployess.apply {
+            layoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            adapter=employeesAdaptor
+        }
     }
 
     private fun showLogoutDialog() {

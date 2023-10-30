@@ -5,7 +5,9 @@
     android:backgroundTint="@color/Light5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="11dp"
+    android:background="@color/white"
     android:layout_margin="@dimen/_25sdp"
+
 
     >
 

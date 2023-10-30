@@ -1,10 +1,13 @@
 package com.example.assigntodo
 
+import java.util.UUID
+
 data class Users(
+    val id : String = UUID.randomUUID().toString(),
     val usertype : String? = null,
-    val bossId : String? = null,
-    val bossName : String? = null,
-    val bossEmail : String? = null,
-    val bossPassword : String? = null,
-    val bossImage : String? = null
+    val userId : String? = null,
+    val userName : String? = null,
+    val userEmail : String? = null,
+    val userPassword : String? = null,
+    val userImage : String? = null
 )
