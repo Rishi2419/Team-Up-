@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/tbEmpWork"
             app:navigationIcon="@drawable/arrow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,15 +25,27 @@
             app:title="Employee Work"
             app:titleTextColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="44dp"
-            android:text="Assign"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWorks"
+            android:layout_width="409dp"
+            android:layout_height="803dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.924" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tbEmpWork" />
+
+        />
+
+
+        <ImageView
+            android:id="@+id/button2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

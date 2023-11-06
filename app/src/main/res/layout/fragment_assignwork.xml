@@ -1,27 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".assignwork"
+    tools:context=".auth.SignupActivity"
     android:background="@color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
-        <androidx.appcompat.widget.Toolbar
-            app:navigationIcon="@drawable/arrow"
-            android:id="@+id/toolbar4"
-            android:layout_width="match_parent"
+
+    <androidx.appcompat.widget.Toolbar
+        app:navigationIcon="@drawable/arrow"
+        android:id="@+id/tbasswrk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/HardBlue"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Assign Work"
+        app:titleTextColor="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etTitle"
+        android:hint="Work Title"
+        android:textColor="@color/HardBlue"
+        android:textColorHint="@color/Medium"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbasswrk"
+        android:background="@drawable/input"
+        android:layout_margin="@dimen/_20sdp"
+        android:padding="@dimen/_15sdp"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTitle">
+
+        <TextView
+            android:id="@+id/tvPriority"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/HardBlue"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:title="Assign Work"
-            app:titleTextColor="#FFFFFF" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_40ssp"
+            android:text="Priority :"
+            android:textColor="@color/HardBlue"
+
+            android:textSize="@dimen/_13sdp" />
+
+        <ImageView
+            android:id="@+id/greenOval"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/green_oval" />
+
+        <ImageView
+            android:id="@+id/yellowOval"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/yellow_oval" />
+
+        <ImageView
+            android:id="@+id/redOval"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+
+
+            android:src="@drawable/red_oval" />
+
+        <TextView
+            android:id="@+id/tvData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="Last date : "
+            android:textColor="@color/HardBlue"
+            android:textSize="@dimen/_13sdp"
+
+            />
+
+        <ImageView
+            android:id="@+id/datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/date_picker" />
+
+
     </LinearLayout>
-</FrameLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_420sdp"
+        android:id="@+id/WorkDesc"
+        android:hint="Work Description..."
+        android:textColor="@color/HardBlue"
+        android:textColorHint="@color/Medium"
+      app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        android:background="@drawable/input"
+        android:layout_margin="@dimen/_20sdp"
+        android:padding="@dimen/_15sdp"
+        />
+
+    <ImageView
+        android:id="@+id/btnDone"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/img_1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

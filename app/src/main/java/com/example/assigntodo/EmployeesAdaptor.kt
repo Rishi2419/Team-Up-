@@ -2,6 +2,7 @@ package com.example.assigntodo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,10 @@ class EmployeesAdaptor :RecyclerView.Adapter<EmployeesAdaptor.EmplyoeeViewHolder
         holder.binding.apply {
             Glide.with(holder.itemView).load(empdata.userImage).into(ivEmployeeProfile)
             tvEmployeeName.text=empdata.userName
+        }
+        holder.itemView.setOnClickListener {
+            val action = EmployeeFragmentDirections.actionEmployeeFragmentToWork(empdata)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 

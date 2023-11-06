@@ -1,59 +1,150 @@
 package com.example.assigntodo
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.assigntodo.databinding.FragmentAssignworkBinding
+import com.example.assigntodo.utils.utils
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import okhttp3.internal.Util
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [assignwork.newInstance] factory method to
- * create an instance of this fragment.
- */
 class assignwork : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    val employeeData by navArgs<assignworkArgs>()
+    private lateinit var binding: FragmentAssignworkBinding
+    private var priority = "1"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_assignwork, container, false)
+
+        binding = FragmentAssignworkBinding.inflate(layoutInflater)
+        binding.tbasswrk.apply {
+            setNavigationOnClickListener {
+                activity?.onBackPressed()
+            }
+
+        }
+        setpriority()
+        setDate()
+        binding.btnDone.setOnClickListener{
+            assignWork()
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment assignwork.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            assignwork().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun assignWork() {
+        utils.showdialog(requireContext())
+
+        val workTitle = binding.etTitle.text.toString()
+        val workDescriptin = binding.WorkDesc.text.toString()
+        val workLastDate = binding.tvData.text.toString()
+
+        if (workTitle.isEmpty()){
+            utils.apply {
+                utils.hideDialog()
+                utils.showtoast(requireContext(),"Please select work title")
             }
+
+        }
+        else if (workLastDate== "Last date : "){
+            utils.apply {
+                utils.hideDialog()
+                utils.showtoast(requireContext(),"Please choose last date")
+            }
+        }
+        else{
+            val empId = employeeData.employeeDetail.userId
+            val bossId = FirebaseAuth.getInstance().currentUser?.uid
+            val workRoom = bossId+empId
+
+            val work = Works(
+                workTitle = workTitle,
+                workDesc = workDescriptin,
+                workPriority = priority,
+                workLastDate = workLastDate,
+                workStatus = "1"
+            )
+
+            FirebaseDatabase.getInstance().getReference("Works").child(workRoom).push().setValue(work)
+                .addOnSuccessListener {
+                    utils.hideDialog()
+                    utils.showtoast(requireContext(),"Works has been assigned to ${employeeData.employeeDetail.userName}")
+                    val action = assignworkDirections.actionAssignworkfragmentToWorkfragment(employeeData.employeeDetail)
+                    findNavController().navigate(action)
+                }
+
+        }
+    }
+
+
+    private fun setDate() {
+        val myCalendar = Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener{view,year,month,dayOfMonth->
+            myCalendar.apply {
+                set(Calendar.YEAR,year)
+                set(Calendar.MONTH,month)
+                set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                updateLable(myCalendar)
+            }
+        }
+        binding.datepicker.setOnClickListener{
+            DatePickerDialog(requireContext(),datePicker,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+    }
+
+    private fun updateLable(myCalendar: Calendar) {
+        val myFormat = "dd-MM-yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.UK)
+        binding.tvData.text=sdf.format(myCalendar.time)
+    }
+
+    private fun setpriority() {
+        binding.apply {
+            greenOval.setOnClickListener {
+                utils.showtoast(requireContext(), "Priority : Low")
+                priority = "1"
+                binding.greenOval.setImageResource(R.drawable.green_oval)
+                binding.yellowOval.setImageResource(R.drawable.yellow_selected)
+                binding.redOval.setImageResource(R.drawable.red_selcted)
+            }
+
+
+
+            yellowOval.setOnClickListener {
+                utils.showtoast(requireContext(), "Priority : Medium")
+                priority = "2"
+                binding.yellowOval.setImageResource(R.drawable.yellow_oval)
+                binding.greenOval.setImageResource(R.drawable.green_seleted)
+                binding.redOval.setImageResource(R.drawable.red_selcted)
+            }
+
+
+
+            redOval.setOnClickListener {
+                utils.showtoast(requireContext(), "Priority : High")
+                priority = "3"
+                binding.redOval.setImageResource(R.drawable.red_oval)
+                binding.yellowOval.setImageResource(R.drawable.yellow_selected)
+                binding.greenOval.setImageResource(R.drawable.green_seleted)
+            }
+        }
+
     }
 }
+
+
+
