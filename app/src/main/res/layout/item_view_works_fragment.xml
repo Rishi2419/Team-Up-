@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/_7sdp"
     app:cardElevation="@dimen/_10sdp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp">
+        android:padding="@dimen/_5sdp"
+        android:background="@color/white">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +28,6 @@
                 android:layout_width="@dimen/_235sdp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="tvTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivOval"
                 app:layout_constraintTop_toTopOf="parent">
