@@ -12,5 +12,6 @@ data class Users(
     val userName : String? = null,
     val userEmail : String? = null,
     val userPassword : String? = null,
-    val userImage : String? = null
+    val userImage : String? = null,
+    val userToken :String? = null
 ): Parcelable

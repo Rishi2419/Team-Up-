@@ -70,8 +70,14 @@ class assignwork : Fragment() {
             val empId = employeeData.employeeDetail.userId
             val bossId = FirebaseAuth.getInstance().currentUser?.uid
             val workRoom = bossId+empId
+            val randomId = (1..20).map {
+                listOf(('A'..'Z'), ('a'..'z'), ('0'..'9')).random().random()
+            }.joinToString("")
+
 
             val work = Works(
+                bossId = bossId,
+                workId = randomId,
                 workTitle = workTitle,
                 workDesc = workDescriptin,
                 workPriority = priority,
@@ -79,7 +85,7 @@ class assignwork : Fragment() {
                 workStatus = "1"
             )
 
-            FirebaseDatabase.getInstance().getReference("Works").child(workRoom).push().setValue(work)
+            FirebaseDatabase.getInstance().getReference("Works").child(workRoom).child(randomId).setValue(work)
                 .addOnSuccessListener {
                     utils.hideDialog()
                     utils.showtoast(requireContext(),"Works has been assigned to ${employeeData.employeeDetail.userName}")

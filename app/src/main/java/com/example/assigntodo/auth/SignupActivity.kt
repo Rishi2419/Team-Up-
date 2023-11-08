@@ -15,8 +15,10 @@ import com.example.assigntodo.Users
 import com.example.assigntodo.databinding.AccountDialogBinding
 import com.example.assigntodo.databinding.ActivitySignupBinding
 import com.example.assigntodo.utils.utils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -127,6 +129,10 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun saveUserData(name: String, email: String, password: String, downloadURL: Uri?) {
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task->
+            if (!task.isSuccessful)return@OnCompleteListener
+            val token = task.result
             lifecycleScope.launch {
                 val db = FirebaseDatabase.getInstance().getReference("Users")
                 try {
@@ -148,10 +154,10 @@ class SignupActivity : AppCompatActivity() {
                         }
                         val uId = firebaseAuth.user?.uid.toString()
                         val saveusertype = if(userType == "Boss")"Boss" else "Employee"
-                        val boss = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString())
+                        val boss = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString(), userToken = token )
                         db.child(uId).setValue(boss).await()
-                        val employee = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString())
-                        db.child(uId).setValue(employee).await()
+//                        val employee = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString(),userToken = token )
+//                        db.child(uId).setValue(employee).await()
 
                     }
                     else{
@@ -160,10 +166,14 @@ class SignupActivity : AppCompatActivity() {
                     }
                 }
                 catch (e:Exception){
-                        utils.hideDialog()
+                    utils.hideDialog()
                     utils.showtoast(this@SignupActivity,e.message.toString())
                 }
             }
+
+        })
+
+
 
     }
 }
