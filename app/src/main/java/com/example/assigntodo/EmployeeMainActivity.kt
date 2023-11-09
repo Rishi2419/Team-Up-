@@ -4,14 +4,15 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.assigntodo.API.ApiUtilities
 import com.example.assigntodo.auth.SigninActivity
 import com.example.assigntodo.databinding.ActivityEmployeeMainBinding
 import com.example.assigntodo.databinding.CompleteDialogBinding
 import com.example.assigntodo.databinding.ShowLogoutBinding
 import com.example.assigntodo.databinding.StartProgressDialogBinding
-import com.example.assigntodo.databinding.UnassignedDialogBinding
 import com.example.assigntodo.utils.utils
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +20,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EmployeeMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEmployeeMainBinding
@@ -44,7 +48,7 @@ class EmployeeMainActivity : AppCompatActivity() {
     }
 
     private fun showEmployeeWorks() {
-        utils.showdialog(this)
+
         val empId = FirebaseAuth.getInstance().currentUser?.uid
         val workRef = FirebaseDatabase.getInstance()
         workRef.getReference("Works").addValueEventListener(object : ValueEventListener {
@@ -60,7 +64,13 @@ class EmployeeMainActivity : AppCompatActivity() {
                                     workList.add(work!!)
                                 }
                                 employeeworkAdapter.differ.submitList(workList)
-                                utils.hideDialog()
+
+
+                                binding.emptyView.visibility = if (workList.isEmpty()){
+                                    View.VISIBLE
+                                }else{
+                                    View.GONE
+                                }
                             }
 
                             override fun onCancelled(error: DatabaseError) {
@@ -132,6 +142,7 @@ class EmployeeMainActivity : AppCompatActivity() {
                     text = "Work Completed"
                 }
                 updateStatus(works, "3")
+                sendNotification(works.bossId, works.workTitle.toString())
                 alertDialog.dismiss()
             }
             dialog.No.setOnClickListener {
@@ -217,4 +228,30 @@ class EmployeeMainActivity : AppCompatActivity() {
         }
 
     }
+    private fun sendNotification(bossId: String?, workTitle: String) {
+        val bossDataSnapshot = FirebaseDatabase.getInstance().getReference("Users").child(bossId!!).get()
+        bossDataSnapshot.addOnSuccessListener {
+            val bossDetails = it.getValue(Users::class.java)
+            val bossToken = bossDetails?.userToken
+            val notification = Notification(bossToken, NotificationData("WORK COMPLETED",workTitle))
+
+            ApiUtilities.api.sendNotification(notification).enqueue(object :
+                Callback<Notification> {
+                override fun onResponse(
+                    call: Call<Notification>,
+                    response: Response<Notification>
+                ) {
+                    if (response.isSuccessful){
+                        Log.d("notify","Send completed")
+                    }
+                }
+
+                override fun onFailure(call: Call<Notification>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
+    }
+
 }

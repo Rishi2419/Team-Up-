@@ -33,4 +33,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tb_employee" />
 
     />
+
+    <ImageView
+
+        android:id="@+id/emptyView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_employee" />
 </androidx.constraintlayout.widget.ConstraintLayout>

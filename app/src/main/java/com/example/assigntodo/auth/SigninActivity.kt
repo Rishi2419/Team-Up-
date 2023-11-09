@@ -89,11 +89,11 @@ class SigninActivity : AppCompatActivity() {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 val currentUserData = snapshot.getValue(Users::class.java)
                                 if(currentUserData?.usertype=="Employee"){
-                                    startActivity(Intent(this@SigninActivity,EmployeeMainActivity::class.java))
+                                    startActivity(Intent(this@SigninActivity, EmployeeMainActivity::class.java))
                                     finish()
                                 }
                                 if(currentUserData?.usertype=="Boss"){
-                                    startActivity(Intent(this@SigninActivity,BossMainActivity::class.java))
+                                    startActivity(Intent(this@SigninActivity, BossMainActivity::class.java))
                                     finish()
                                 }
 //                            if(currentUserData?.usertype=="Employee"){

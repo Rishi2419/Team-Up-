@@ -36,6 +36,8 @@
             app:argType="com.example.assigntodo.Users" />
         <action
             android:id="@+id/action_assignworkfragment_to_workfragment"
-            app:destination="@id/workfragment" />
+            app:destination="@id/workfragment"
+            app:popUpTo="@id/workfragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

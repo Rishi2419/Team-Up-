@@ -2,17 +2,23 @@ package com.example.assigntodo
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.assigntodo.API.ApiUtilities
 import com.example.assigntodo.databinding.FragmentAssignworkBinding
+import com.example.assigntodo.assignworkArgs
+import com.example.assigntodo.assignworkDirections
 import com.example.assigntodo.utils.utils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import okhttp3.internal.Util
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -87,12 +93,38 @@ class assignwork : Fragment() {
 
             FirebaseDatabase.getInstance().getReference("Works").child(workRoom).child(randomId).setValue(work)
                 .addOnSuccessListener {
+                    sendNotification(empId,workTitle)
                     utils.hideDialog()
                     utils.showtoast(requireContext(),"Works has been assigned to ${employeeData.employeeDetail.userName}")
-                    val action = assignworkDirections.actionAssignworkfragmentToWorkfragment(employeeData.employeeDetail)
+                    val action =
+                        assignworkDirections.actionAssignworkfragmentToWorkfragment(employeeData.employeeDetail)
                     findNavController().navigate(action)
                 }
 
+        }
+    }
+
+    private fun sendNotification(empId: String?, workTitle: String) {
+        val empDataSnapshot = FirebaseDatabase.getInstance().getReference("Users").child(empId!!).get()
+        empDataSnapshot.addOnSuccessListener {
+            val empDetails = it.getValue(Users::class.java)
+            val empToken = empDetails?.userToken
+            val notification = Notification(empToken, NotificationData("WORK ASSIGNED",workTitle))
+            ApiUtilities.api.sendNotification(notification).enqueue(object :Callback<Notification>{
+                override fun onResponse(
+                    call: Call<Notification>,
+                    response: Response<Notification>
+                ) {
+                    if (response.isSuccessful){
+                       Log.d("notify","Work assigned")
+                    }
+                }
+
+                override fun onFailure(call: Call<Notification>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
         }
     }
 

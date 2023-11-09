@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.core.os.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.example.assigntodo.BossMainActivity
 import com.example.assigntodo.EmployeeMainActivity
@@ -43,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
                                     finish()
                                 }
                                 if(currentUserData?.usertype=="Employee"){
-                                    startActivity(Intent(this@SplashActivity,EmployeeMainActivity::class.java))
+                                    startActivity(Intent(this@SplashActivity, EmployeeMainActivity::class.java))
                                     finish()
                                 }
 

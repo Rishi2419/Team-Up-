@@ -1,7 +1,6 @@
 package com.example.assigntodo
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,10 +9,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.assigntodo.auth.SigninActivity
 import com.example.assigntodo.databinding.FragmentWorkBinding
-import com.example.assigntodo.databinding.ShowLogoutBinding
 import com.example.assigntodo.databinding.UnassignedDialogBinding
+import com.example.assigntodo.workArgs
+import com.example.assigntodo.workDirections
 import com.example.assigntodo.utils.utils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -71,6 +70,12 @@ class work : Fragment() {
                    }
                     worksAdaptor.differ.submitList(workList)
                     utils.hideDialog()
+
+                    binding.emptyView.visibility = if (workList.isEmpty()){
+                        View.VISIBLE
+                    }else{
+                        View.GONE
+                    }
 
                 }
 

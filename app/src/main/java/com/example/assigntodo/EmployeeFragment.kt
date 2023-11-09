@@ -7,12 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.assigntodo.auth.SigninActivity
-import com.example.assigntodo.databinding.ForgotPasswordBinding
 import com.example.assigntodo.databinding.FragmentEmployeeBinding
-import com.example.assigntodo.databinding.FragmentWorkBinding
 import com.example.assigntodo.databinding.ShowLogoutBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -36,7 +33,7 @@ class EmployeeFragment : Fragment() {
         binding.apply  {
             tbemployees.setOnMenuItemClickListener{
                 when(it.itemId){
-                    R.id.Logout->{
+                    R.id.Logout ->{
                         showlogout()
                         true
                     }
