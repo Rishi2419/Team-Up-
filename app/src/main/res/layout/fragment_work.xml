@@ -16,41 +16,43 @@
             android:id="@+id/tbEmpWork"
             app:navigationIcon="@drawable/arrow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:background="@color/HardBlue"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rvWorks"
             app:title="Employee Work"
             app:titleTextColor="#FFFFFF" />
+
+
+        />
 
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvWorks"
-            android:layout_width="409dp"
-            android:layout_height="803dp"
+            android:layout_width="390dp"
+            android:layout_height="850dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tbEmpWork" />
+            app:layout_constraintTop_toBottomOf="@+id/tbEmpWork"
+            app:layout_constraintVertical_bias="0.0" />
 
-        />
-
-
-        <ImageView
-            android:id="@+id/button2"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btnadd"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/add" />
+            app:srcCompat="@drawable/add"
+            android:background="@color/HardBlue"
+            app:shapeAppearanceOverlay="@style/Button"/>
 
         <ImageView
             android:visibility="gone"

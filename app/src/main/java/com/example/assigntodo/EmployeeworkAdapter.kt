@@ -17,7 +17,7 @@ class EmployeeworkAdapter(
         RecyclerView.ViewHolder(binding.root)
 
 
-    val diffUtil = object : DiffUtil.ItemCallback<Works>() {
+   private val diffUtil = object : DiffUtil.ItemCallback<Works>() {
         override fun areItemsTheSame(oldItem: Works, newItem: Works): Boolean {
             return oldItem.id == newItem.id
         }
@@ -71,12 +71,6 @@ class EmployeeworkAdapter(
                 notifyItemChanged(position, 0)
             }
 
-            if (tvStatus.text == "Progress" || tvStatus.text == "Completed"){
-                btnProgress.text="In Progress"
-            }
-            if (tvStatus.text == "Completed"){
-                btnCompleted.text="Work Completed"
-            }
 
             btnProgress.setOnClickListener{ onProgressButtonClicked(works,btnProgress)}
             btnCompleted.setOnClickListener{onCompletedButtonClicked(works,btnCompleted)}

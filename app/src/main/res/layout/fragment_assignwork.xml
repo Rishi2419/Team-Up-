@@ -124,7 +124,7 @@
         android:padding="@dimen/_15sdp"
         />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/btnDone"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -132,7 +132,10 @@
         android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/img_1" />
+        app:srcCompat="@drawable/done"
+        android:background="@color/HardBlue"
+        app:shapeAppearanceOverlay="@style/Button"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

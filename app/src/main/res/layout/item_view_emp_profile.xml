@@ -2,14 +2,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="390dp"
     android:layout_height="wrap_content"
     android:elevation="2dp"
     app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true"
-app:cardCornerRadius="10dp"
-    android:layout_marginTop="@dimen/_10sdp"
 
 
     >
@@ -18,18 +17,17 @@ app:cardCornerRadius="10dp"
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="3dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivEmployeeProfile"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:src="@drawable/cirleshape"
-
             app:layout_constraintLeft_toLeftOf="parent"
+
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
         <TextView
             android:id="@+id/tvEmployeeName"
@@ -38,7 +36,7 @@ app:cardCornerRadius="10dp"
             android:layout_marginLeft="12dp"
             android:text="Virat Kohli"
             android:textColor="@color/HardBlue"
-            android:textSize="@dimen/_26ssp"
+            android:textSize="@dimen/_20ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/ivEmployeeProfile"
             app:layout_constraintTop_toTopOf="parent" />

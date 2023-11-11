@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,9 +9,7 @@
     android:background="@color/white">
 
 
-
-
-            <TextView
+    <TextView
                 android:id="@+id/tvSignup"
                 android:fontFamily="sans-serif-condensed-light"
 
@@ -32,15 +31,28 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivUserImage"
-        android:layout_width="156.00dp"
-        android:layout_height="156.00dp"
-        android:layout_marginTop="48dp"
-        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-        android:src="@drawable/cirleshape"
+        android:layout_width="170.00dp"
+        android:layout_height="170.00dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSignup"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/camera"
+        android:layout_width="50.00dp"
+        android:layout_height="50.00dp"
+        android:layout_marginTop="148dp"
+        android:src="@drawable/camera"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSignup"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
     <TextView
                 android:id="@+id/tvWelcome"
@@ -60,11 +72,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
-                android:padding="20dp"
+                android:padding="10dp"
 
                 >
 
@@ -114,32 +126,31 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvNameLL"
-                style="@style/LoginTextInputOuterFieldStyle"
-                android:layout_width="match_parent"
-                app:boxStrokeColor="@color/HardBlue"
-                android:textColorHint="@color/black"
-                app:endIconTint="@color/HardBlue"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llUserSelection">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvNameLL"
+        style="@style/LoginTextInputOuterFieldStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/HardBlue"
+        app:endIconTint="@color/HardBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llUserSelection">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/input"
-                    android:hint="Enter your name"
-                    android:inputType="textEmailAddress" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etName"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:hint="Enter your name"
+            android:inputType="textEmailAddress" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvEmailLLL"
                 style="@style/LoginTextInputOuterFieldStyle"
                 android:layout_width="match_parent"
@@ -267,6 +278,8 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

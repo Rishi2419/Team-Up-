@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.assigntodo.API.ApiUtilities
 import com.example.assigntodo.auth.SigninActivity
@@ -50,12 +51,12 @@ class EmployeeMainActivity : AppCompatActivity() {
     private fun showEmployeeWorks() {
 
         val empId = FirebaseAuth.getInstance().currentUser?.uid
-        val workRef = FirebaseDatabase.getInstance()
-        workRef.getReference("Works").addValueEventListener(object : ValueEventListener {
+        val workRef = FirebaseDatabase.getInstance().getReference("Works")
+            workRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (workRooms in snapshot.children) {
                     if (workRooms.key?.contains(empId!!) == true) {
-                        val empWorkref = workRef.getReference("Works").child(workRooms.key!!)
+                        val empWorkref = workRef.child(workRooms.key!!)
                         empWorkref.addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 val workList = ArrayList<Works>()
@@ -103,6 +104,8 @@ class EmployeeMainActivity : AppCompatActivity() {
     private fun onProgressButtonClicked(works: Works, progressButton: MaterialButton) {
 
         if (progressButton.text != "In Progress") {
+            updateStatus(works,"1")
+
 
             val dialog = StartProgressDialogBinding.inflate(layoutInflater)
 
@@ -113,11 +116,12 @@ class EmployeeMainActivity : AppCompatActivity() {
             dialog.Yes.setOnClickListener {
 
                 progressButton.apply {
-                    text = "In Progress"
+                    setTextColor(ContextCompat.getColor(this@EmployeeMainActivity,R.color.Light5))
                 }
                 updateStatus(works, "2")
                 alertDialog.dismiss()
             }
+
             dialog.No.setOnClickListener {
                 alertDialog.dismiss()
             }
@@ -128,7 +132,9 @@ class EmployeeMainActivity : AppCompatActivity() {
     }
 
     private fun onCompletedButtonClicked(works: Works, completedButton: MaterialButton) {
+
         if (completedButton.text != "Work Completed") {
+            updateStatus(works,"1")
 
             val dialog = CompleteDialogBinding.inflate(layoutInflater)
 
@@ -139,7 +145,8 @@ class EmployeeMainActivity : AppCompatActivity() {
             dialog.Yes.setOnClickListener {
 
                 completedButton.apply {
-                    text = "Work Completed"
+                    setTextColor(ContextCompat.getColor(this@EmployeeMainActivity,R.color.Light5))
+
                 }
                 updateStatus(works, "3")
                 sendNotification(works.bossId, works.workTitle.toString())

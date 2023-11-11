@@ -156,8 +156,8 @@ class SignupActivity : AppCompatActivity() {
                         val saveusertype = if(userType == "Boss")"Boss" else "Employee"
                         val boss = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString(), userToken = token )
                         db.child(uId).setValue(boss).await()
-//                        val employee = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString(),userToken = token )
-//                        db.child(uId).setValue(employee).await()
+                        val employee = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString(),userToken = token )
+                        db.child(uId).setValue(employee).await()
 
                     }
                     else{

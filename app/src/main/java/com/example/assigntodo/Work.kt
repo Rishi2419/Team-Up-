@@ -36,7 +36,7 @@ class work : Fragment() {
     ): View? {
         binding = FragmentWorkBinding.inflate(layoutInflater)
 
-        binding.button2.setOnClickListener {
+        binding.btnadd.setOnClickListener {
             val action = workDirections.actionWorkToAssignwork(employeeDetail.employeeData)
             findNavController().navigate(action)
         }
@@ -122,7 +122,7 @@ class work : Fragment() {
                         val currentWork = allWorks.getValue(Works::class.java)
                         if (currentWork==works){
                             allWorks.ref.removeValue()
-                            utils.showtoast(requireContext(),"Work has been Unassigned!")
+
                         }
                     }
                 }

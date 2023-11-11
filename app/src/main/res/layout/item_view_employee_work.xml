@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/_7sdp"
-    app:cardElevation="@dimen/_10sdp"
     app:cardUseCompatPadding="true"
     android:background="@color/white">
 
@@ -123,7 +122,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_weight="0.5"
-                android:text="Starting"
+                android:text="Start"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/HardBlue"

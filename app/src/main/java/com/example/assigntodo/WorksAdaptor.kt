@@ -65,7 +65,7 @@ class WorksAdaptor(val onUnassignedButtonClicked: (Works) -> Unit) : RecyclerVie
                 works.expanded = !works.expanded
                 notifyItemChanged(position,0)
             }
-            btnWorkDone.setOnClickListener{ onUnassignedButtonClicked(works)
+            btnWorkDone.setOnClickListener{onUnassignedButtonClicked(works)
 
             }
 
