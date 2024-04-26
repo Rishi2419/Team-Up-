@@ -82,6 +82,7 @@ class SigninActivity : AppCompatActivity() {
                 val authResult = firebaseAuth.signInWithEmailAndPassword(email,password).await()
                 val currentUser = authResult.user?.uid
 
+
                 val verifyEmail = firebaseAuth.currentUser?.isEmailVerified
                 if (verifyEmail==true){
                     if (currentUser != null){
