@@ -26,12 +26,15 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        //  Handler - for delay &  Looper - ensures that this delay is handled on the main UI thread.
         Handler(Looper.getMainLooper()).postDelayed( {
 
             val currentUser = FirebaseAuth.getInstance().currentUser?.uid
             if (currentUser != null){
                 lifecycleScope.launch {
                     try {
+//                        addListenerForSingleValueEvent:
+//                        Fetches the data once and stops listening after onDataChange listner is further destroyed
                         FirebaseDatabase.getInstance().getReference("Users").child(currentUser).addListenerForSingleValueEvent(object   :
                             ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
@@ -45,7 +48,6 @@ class SplashActivity : AppCompatActivity() {
                                     startActivity(Intent(this@SplashActivity, EmployeeMainActivity::class.java))
                                     finish()
                                 }
-
 
 //                            while (currentUserData?.usertype=="Boss"){
 //                               startActivity(Intent(this@SigninActivity,BossMainActivity::class.java))

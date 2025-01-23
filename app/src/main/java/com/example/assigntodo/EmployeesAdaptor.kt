@@ -25,7 +25,10 @@ class EmployeesAdaptor :RecyclerView.Adapter<EmployeesAdaptor.EmplyoeeViewHolder
         }
 
     }
+
+    //Asynchronously
     val differ = AsyncListDiffer(this,diffUtil)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmplyoeeViewHolder {
         return EmplyoeeViewHolder(ItemViewEmpProfileBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }

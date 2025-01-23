@@ -33,6 +33,7 @@ class SignupActivity : AppCompatActivity() {
     private var userType:String=""
 
     private val selectimage = registerForActivityResult(ActivityResultContracts.GetContent()){
+//        it - The URI of the selected image is captured and stored in userImageUri.
         userImageUri = it
          binding.ivUserImage.setImageURI(userImageUri)
     }
@@ -57,7 +58,6 @@ class SignupActivity : AppCompatActivity() {
             tvSignin.setOnClickListener{
                 startActivity(Intent(this@SignupActivity,SigninActivity::class.java))
                 finish()
-
             }
         }
     }
@@ -130,14 +130,18 @@ class SignupActivity : AppCompatActivity() {
 
     private fun saveUserData(name: String, email: String, password: String, downloadURL: Uri?) {
 
+        //FCM for notification
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task->
             if (!task.isSuccessful)return@OnCompleteListener
             val token = task.result
+
+        // Save User
             lifecycleScope.launch {
                 val db = FirebaseDatabase.getInstance().getReference("Users")
                 try {
                     val firebaseAuth = FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).await()
 
+                    // we have  account dialog in xml....creating a view as alert of it
                     if (firebaseAuth.user != null){
                         FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
                             val dialog = AccountDialogBinding.inflate(LayoutInflater.from(this@SignupActivity))
@@ -152,6 +156,7 @@ class SignupActivity : AppCompatActivity() {
                                 finish()
                             }
                         }
+
                         val uId = firebaseAuth.user?.uid.toString()
                         val saveusertype = if(userType == "Boss")"Boss" else "Employee"
                         val boss = Users(usertype = saveusertype,userId= uId, userName = name, userEmail = email, userPassword = password, userImage = downloadURL.toString(), userToken = token )
