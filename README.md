@@ -26,6 +26,9 @@ Welcome to TeamUp!, an Android application designed to streamline collaboration 
 ### Clone the repository:
 git clone https://github.com/Rishi2419/Team-Up-/tree/master
 
+## For a visual walkthrough of TeamUp!'s functionalities, check out the demo video here: 
+https://www.linkedin.com/posts/rishikesh-sahu-error_kotlin-androidstudio-appdev-activity-7130132295230894080-W8Mx?utm_source=share&utm_medium=member_desktop
+
 Open the project in Android Studio.
 Sync the Gradle dependencies.
 Set up Firebase by adding your google-services.json file to the project.
