@@ -24,7 +24,7 @@ Welcome to TeamUp!, an Android application designed to streamline collaboration 
 
 ## Installation
 ### Clone the repository:
-git clone https://github.com/your-username/UdyogSathi.git
+git clone https://github.com/Rishi2419/Team-Up-/tree/master
 
 Open the project in Android Studio.
 Sync the Gradle dependencies.
@@ -36,7 +36,7 @@ Run the project on an emulator or a physical device.
 <table>
   <tr table border="0">
     <td><img src="app/src/main/assets/screen1.jpg" alt="App Screenshot" width="300" height="600"/></td>
-    <td><img src="app/src/main/assets/scrren2.jpg" alt="App Screenshot" width="300" height="600"/></td>
+    <td><img src="app/src/main/assets/screen2.jpg" alt="App Screenshot" width="300" height="600"/></td>
     <td><img src="app/src/main/assets/screen3.jpg" alt="App Screenshot" width="300" height="600"/></td>
   </tr>
   <tr>
