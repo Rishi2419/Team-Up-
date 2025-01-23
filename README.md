@@ -1,4 +1,4 @@
-### TeamUp!
+# TeamUp!
 
 **Revolutionizing Work Collaboration**
 
