@@ -1,10 +1,10 @@
-# TeamUp!
+### TeamUp!
 
 **Revolutionizing Work Collaboration**
 
 Welcome to TeamUp!, an Android application designed to streamline collaboration between bosses and employees. This project translates a thoughtfully crafted UI/UX design into a fully functional and user-friendly experience.
 
-**Key Features:**
+## Key Features:
 
 * **Seamless User Onboarding:** Secure and effortless user registration and login facilitated by Firebase Authentication.
 * **Robust Data Management:** Efficiently store and manage all file types, from images to documents, with Firebase Storage.
@@ -12,7 +12,7 @@ Welcome to TeamUp!, an Android application designed to streamline collaboration 
 * **Instant Communication:** Stay connected with the team through timely notifications for task assignments, updates, and completions delivered via Firebase Cloud Messaging (FCM).
 * **Efficient Network Requests:** Enjoy a smooth and responsive user experience with Retrofit, simplifying network interactions for seamless data fetching and sending.
 
-**Technologies Used:**
+## Technologies Used:
 
 * **Kotlin & Android Studio:** Leverage the power of Kotlin's modern syntax and Android Studio's robust development environment for efficient and elegant app development.
 * **Firebase:** 
@@ -26,13 +26,14 @@ Welcome to TeamUp!, an Android application designed to streamline collaboration 
 ### Clone the repository:
 git clone https://github.com/Rishi2419/Team-Up-/tree/master
 
-## For a visual walkthrough of TeamUp!'s functionalities, check out the demo video here: 
-https://www.linkedin.com/posts/rishikesh-sahu-error_kotlin-androidstudio-appdev-activity-7130132295230894080-W8Mx?utm_source=share&utm_medium=member_desktop
-
 Open the project in Android Studio.
 Sync the Gradle dependencies.
 Set up Firebase by adding your google-services.json file to the project.
 Run the project on an emulator or a physical device.
+
+## For a visual walkthrough of TeamUp!'s functionalities, check out the demo video here: 
+https://www.linkedin.com/posts/rishikesh-sahu-error_kotlin-androidstudio-appdev-activity-7130132295230894080-W8Mx?utm_source=share&utm_medium=member_desktop
+
 
 ## Screenshots
 
